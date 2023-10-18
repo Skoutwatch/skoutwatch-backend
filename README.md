@@ -222,47 +222,8 @@ GET https://dev-api.gettonote.com/api/v1/user/profile
 </td>
 <td>
 
-```js
-// ./src/utils/types.ts
-export type UserType = {
-  access_locker_documents: boolean;
-  address?: string | null;
-  avatar?: string | null;
-  bvn?: number | string | null;
-  city?: string | null;
-  country?: string | null;
-  created_at: string | null;
-  dob?: string | null;
-  drivers_license_no: string | null;
-  email: string;
-  first_name: string;
-  gender?: string;
-  id: string;
-  identity_number?: string | null;
-  identity_type?: string | null;
-  image: string;
-  initials: string;
-  ip_address: string;
-  is_complete?: boolean | null;
-  is_online: boolean;
-  last_name: string;
-  national_verification: boolean;
-  nin?: string | number | null;
-  permissions: string[];
-  phone?: string | null;
-  role: string[];
-  state?: string | null;
-  system_verification: boolean;
-  updated_at: string;
-};
-
-export function getProfile(token: Token) {
-  return axios({
-    method: "get",
-    url: `${API_URL}user/profile`,
-    headers,
-    params: token,
-  });
+```php
+        return $this->showOne((new UserService())->userPropertyById(auth('api')->user()->id), 201);
 ```
 
 </td>
@@ -271,10 +232,10 @@ export function getProfile(token: Token) {
 
 <br/>
 
-### 2. Document Upload
+### 2. Minting Players NFT 
 
 ```sh
-POST https://dev-api.gettonote.com/api/v1/document-upload-convert
+POST https://dev-api.gettonote.com/api/v1/players
 ```
 
 <table>
@@ -302,48 +263,14 @@ POST https://dev-api.gettonote.com/api/v1/document-upload-convert
 <td>
 
 ```js
-// ./src/utils/types.ts
-export type FileData = {
-  title: string,
-  files: string[] | ArrayBuffer[],
-};
+public function store(StorePlayerAttributeFormRequest $request)
+{
+    $existingUser = User::where('email', $request['email'])->orWhere('nin', $request['nin'])->first();
 
-export type Token = {
-  token?: string,
-  token_type?: string,
-};
+    $user = $existingUser ? $existingUser : User::create($request->except('attributes'));
 
-// Snippet that prepares the PDF content as a base64 string.
+    return (new ProcessNftService())->playerProcess($user, $request);
 
-// ./src/pages/Dashboard/UploadDocument.
-type FileChangeEventType = React.FormEvent<HTMLInputElement>;
-
-function handleFileChange (event: FileChangeEventType) {
-    ...
-    // FileReader function for read the file.
-    let fileReader = new FileReader();
-    // Onload of file read the file content
-    fileReader.onload = function (fileLoadedEvent) {
-    const base64str = fileLoadedEvent.target.result;
-    };
-
-    // Convert PDF data to base64
-    fileReader.readAsDataURL(file);
-    ...
-}
-
-// ./src/utils/api.ts
-export function uploadDocument(data: FileData, token: Token) {
-  return axios({
-    method: "post",
-    url: `${API_URL}document-upload-convert`,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token.token}`,
-    },
-    data,
-  });
 }
 ```
 
