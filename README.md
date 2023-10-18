@@ -64,8 +64,7 @@ Hence, requirements 1, 2, 3 and 5 were met.
 
 ## Built With
 
-- [![React][React.js]][React-url]
-- [![Vite][Vite]][Vite-url]
+- [![PHP][PHP]][php-url]
 
 <!-- GETTING STARTED -->
 
@@ -117,7 +116,6 @@ app/Http/Controllers/Api/Auth/UserController.php
 
 <table>
 <tr>
-<th>Component</th>
 <th>API Call</th>
 </tr>
 <tr>
@@ -168,8 +166,8 @@ POST https://dev-api.gettonote.com/api/v1/user/register
 <td>
   
 <img src="./screenshots/register.png" alt="Logo" width="600">
-<p>./src/pages/Authentication/SignUp.tsx</p>
-<p><strong>Register Screen</strong></p> 
+<p>app/Http/Controllers/Api/Auth/UserController.php</p> 
+<p><strong>Register Feature</strong></p>
 </td>
 <td>
 
