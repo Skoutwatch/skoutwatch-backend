@@ -49,7 +49,7 @@
 
 ## About The Project
 
-![To-Note-Document-Manager](/screenshots/dashboard-view-document.png)
+![Skoutwatch Backend Application](/screenshots/dashboard-view-document.png)
 
 This is the application built with PHP that creates the endpoints of the application indepth
 
@@ -59,7 +59,6 @@ It takes care of:
 - User Country verification (Nigeria for now)
 - Nft Storage of players and Attributes
 - Initiating Solana Wallet
-- 
 
 Hence, requirements 1, 2, 3 and 5 were met.
 
@@ -201,7 +200,6 @@ GET https://dev-api.gettonote.com/api/v1/user/profile
 
 <table>
 <tr>
-<th>Component</th>
 <th>API Call</th>
 </tr>
 <tr>
